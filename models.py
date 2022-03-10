@@ -47,3 +47,5 @@ class Spaceship(GameObject):
 
     def accelerate(self):
         self.velocity += self.direction * self.ACCELERATION
+        if self.velocity - Vector2(60) < 1e4:
+            self.velocity = self.velocity
