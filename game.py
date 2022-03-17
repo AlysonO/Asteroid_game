@@ -45,5 +45,5 @@ class Asteroids:
         self.screen.blit(self.background, (0, 0))
         self.spaceship.draw(self.screen)
         pygame.display.flip()
-        self.clock.tick(60)
+        self.clock.tick(30)
 

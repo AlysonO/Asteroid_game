@@ -25,7 +25,7 @@ class GameObject:
 
 class Spaceship(GameObject):
     MANEUVERABILITY = 3
-    ACCELERATION = 0.25
+    ACCELERATION = 0.1
 
     def __init__(self, position):
         # Copies the UP vector
