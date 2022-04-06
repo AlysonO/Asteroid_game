@@ -16,7 +16,8 @@ class Asteroids:
         self.clock = pygame.time.Clock()
 
         self.asteroids = []
-        self.spaceship = Spaceship((400, 300))
+        self.bullets = []
+        self.spaceship = Spaceship((400, 300), self.bullets.append)
 
         for _ in range(6):
             while True:
@@ -36,7 +37,7 @@ class Asteroids:
         pygame.display.set_caption("Sakura Rain")
 
     def _get_game_objects(self):
-        game_objects = [*self.asteroids]
+        game_objects = [*self.asteroids, *self.bullets]
 
         if self.spaceship:
             game_objects.append(self.spaceship)
@@ -47,6 +48,8 @@ class Asteroids:
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 pygame.quit()
+            elif (self.spaceship and event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE):
+                self.spaceship.shoot()
 
         is_key_pressed = pygame.key.get_pressed()
 
@@ -67,6 +70,17 @@ class Asteroids:
                 if asteroid.collides_with(self.spaceship):
                     self.spaceship = None
                     break
+
+        for bullet in self.bullets[:]:
+            for asteroid in self.asteroids[:]:
+                if asteroid.collides_with(bullet):
+                    self.asteroids.remove(asteroid)
+                    self.bullets.remove(bullet)
+                    break
+
+        for bullet in self.bullets[:]:
+            if not self.screen.get_rect().collidepoint(bullet.position):
+                self.bullets.remove(bullet)
 
     def _graphics(self):
         self.screen.blit(self.background, (0, 0))
