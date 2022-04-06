@@ -6,12 +6,13 @@ from models import Spaceship, Asteroid
 
 running = True
 
-class Asteroids:
+class Game:
     MIN_ASTEROID_DISTANCE = 250
 
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode((800, 600))
+        pygame.display.set_caption("Sakura Rain")
         self.background = load_sprite("backgroundsakura", False)
         self.clock = pygame.time.Clock()
         self.font = pygame.font.Font("Fonts/Roboto_Mono/RobotoMono-Italic-VariableFont_wght.ttf", 64)
@@ -36,7 +37,6 @@ class Asteroids:
 
     def _init_game(self):
         pygame.init()
-        pygame.display.set_caption("Sakura Rain")
 
     def _get_game_objects(self):
         game_objects = [*self.asteroids, *self.bullets]

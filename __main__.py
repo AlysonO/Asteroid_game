@@ -1,7 +1,7 @@
 # %%
 
-from game import Asteroids
+from game import Game
 
-space_rocks = Asteroids()
+space_rocks = Game()
 space_rocks.main_loop()
 # %%

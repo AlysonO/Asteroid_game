@@ -26,7 +26,7 @@ def get_random_velocity(min_speed, max_speed):
     angle = random.randrange(0, 360)
     return Vector2(speed, 0).rotate(angle)
 
-def print_text(surface, text, font, color=Color("tomato")):
+def print_text(surface, text, font, color=Color((138, 0, 48, 1))):
     text_surface = font.render(text, True, color)
 
     rect = text_surface.get_rect()
