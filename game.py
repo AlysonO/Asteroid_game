@@ -15,7 +15,7 @@ class Game:
         pygame.display.set_caption("Sakura Rain")
         self.background = load_sprite("backgroundsakura", False)
         self.clock = pygame.time.Clock()
-        self.font = pygame.font.Font("Fonts/Roboto_Mono/RobotoMono-Italic-VariableFont_wght.ttf", 64)
+        self.font = pygame.font.Font("Fonts/Roboto_Mono/RobotoMono-Italic-VariableFont_wght.ttf", 32)
         self.message = ""
 
         self.asteroids = []
@@ -52,6 +52,9 @@ class Game:
                 pygame.quit()
             elif (self.spaceship and event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE):
                 self.spaceship.shoot()
+            elif (not self.spaceship and event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN):
+                self.__init__()
+                self.main_loop()
 
         is_key_pressed = pygame.key.get_pressed()
 
@@ -71,7 +74,7 @@ class Game:
             for asteroid in self.asteroids:
                 if asteroid.collides_with(self.spaceship):
                     self.spaceship = None
-                    self.message = "Oh no! You lost!"
+                    self.message = "Oh no! You lost! Press enter to restart."
                     break
 
         for bullet in self.bullets[:]:
